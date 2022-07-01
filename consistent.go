@@ -137,6 +137,7 @@ func New(members []Member, config Config) *Consistent {
 }
 
 // GetMembers returns a thread-safe copy of members.
+// If Add and Remove members call is executed as well as Get Members call is executed, sync mutex ensures get members result is latest and correct at that time instance
 func (c *Consistent) GetMembers() []Member {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
